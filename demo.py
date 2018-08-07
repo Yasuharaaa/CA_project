@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import cv2
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QFileDialog
 from MainWin import Ui_MainWindow
@@ -12,12 +13,14 @@ from PyQt5 import QtCore
 from PyQt5.QtGui import *
 import qdarkstyle
 from PyQt5 import QtWidgets
+from PyQt5.QtSql import QSqlDatabase, QSqlQuery
+
 
 class MainForm(QMainWindow, Ui_MainWindow, QWidget):
     def __init__(self):
         super(MainForm, self).__init__()
         self.setupUi(self)
-        self.model = QStandardItemModel(10, 3);
+        self.model = QStandardItemModel(10, 3)
         self.model.setHorizontalHeaderLabels(['Item1', 'Item2', 'Item3'])
 
         for row in range(24):
@@ -68,17 +71,31 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
 
 
     def showImg(self):
+        cv2.imread("./5.jpg")
         self.label_2.setPixmap(QtGui.QPixmap("./5.jpg"))
+        self.label_2.setScaledContents(True)  # 让图片自适应label大小
         #self.label_2.setScaleContents(True)
         #detect_function()
         sift()
         self.label_3.setPixmap(QtGui.QPixmap("./test5.jpg"))
+        self.label_3.setScaledContents(True)  # 让图片自适应label大小
         # self.graphicsView.scene = QtWidgets.QGraphicsScene()
         # item = QtWidgets.QGraphicsPixmapItem("./5.jpg")
         # self.graphicsView.scene.addItem(item)
         # self.graphicsView.setScene(self.graphicsView.scene)
         self.label_2.setStyleSheet("border:2px solid red;")
         self.label_3.setStyleSheet("border:2px solid red;")
+
+    def createDB(self): #创建数据库
+        db = QSqlDatabase.addDatabase('QSQLITE')
+        db.setDatabaseName('c:/ca_project/Demo/TestSql/database.db')
+
+        if not db.open():
+            QMessageBox.critical(None, ("无法打开数据库"),
+                                 ("无法建立到数据库的连接,这个例子需要SQLite 支持，请检查数据库配置。\n\n"
+                                  "点击取消按钮退出应用。"),
+                                 QMessageBox.Cancel)
+            return False
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
