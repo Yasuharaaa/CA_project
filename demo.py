@@ -40,7 +40,7 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         self.setLayout(dlgLayout)
         # 点击show按钮显示原始图像
         self.pushButton_2.clicked.connect(self.showImg)
-        #self.zoom_in.clicked.connect(self.zoomImg)
+        self.zoom_in.clicked.connect(self.zoomImg)
         # 点击detect按钮显示检测后的图像
         #self.pushButton_2.clicked.connect(self.detect)
         self.label_2.setStyleSheet("border:2px solid black;")
@@ -72,11 +72,9 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         # self.label_12.setPalette(pe)
 
     def zoomImg(self):  #放大图片
-        # newWindow = SecondWindow()
-        # newWindow.show()
-        # newWindow.exec_()
-        pass
-
+        self.s = SecondWindow()
+        if not self.s.isVisible():
+            self.s.show()
     def showImg(self):
         cv2.imread("./5.jpg")
         self.label_2.setPixmap(QtGui.QPixmap("./5.jpg"))
@@ -113,25 +111,22 @@ class SecondWindow(QWidget):
         self.label_10.setGeometry(QtCore.QRect(150, 150, 1000, 1000))
         self.label_10.setFrameShadow(QtWidgets.QFrame.Plain)
         self.label_10.setLineWidth(10)
-        self.label_10.setObjectName("label_2")
+        self.label_10.setObjectName("label_10")
         self.label_10.setPixmap(QtGui.QPixmap("./test5.jpg"))
         self.label_10.setScaledContents(True)  # 让图片自适应label大小
         # self.setStyleSheet("background: black")
         self.label_10.setStyleSheet("border:2px solid red;")
 
-    def handle_click(self):
-        if not self.isVisible():
-            self.show()
 
-    def handle_close(self):
-        self.close()
+
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
     win = MainForm()
-    s = SecondWindow()
-    win.zoom_in.clicked.connect(s.handle_click)
+    #s = SecondWindow()
+    #win.zoom_in.clicked.connect(s.handle_click)
     #win.btn.clicked.connect(ex.hide)
     win.show()
     sys.exit(app.exec_())
