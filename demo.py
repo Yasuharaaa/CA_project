@@ -41,8 +41,9 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         # 点击show按钮显示原始图像
         self.pushButton_2.clicked.connect(self.showImg)
         self.zoom_in.clicked.connect(self.zoomImg)
-        # 点击detect按钮显示检测后的图像
-        #self.pushButton_2.clicked.connect(self.detect)
+        # 点击inquire按钮显示检测后的图像
+        self.pushButton.clicked.connect(self.inquire)
+        #设置字体格式
         self.label_2.setStyleSheet("border:2px solid black;")
         self.label_2.setFont(QFont("Roman times", 20, QFont.Bold))
         self.label_2.setAlignment(Qt.AlignCenter)
@@ -58,24 +59,28 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         self.label_7.setStyleSheet("border:2px solid black;")
         self.label_10.setStyleSheet("border:2px solid red;")
         self.label_12.setStyleSheet("border:2px solid blue;")
-        # pe = QPalette()
-        # #pe.setColor(QPalette.WindowText, Qt.red)  # 设置字体颜色
-        # self.label_7.setAutoFillBackground(True)  # 设置背景充满，为设置背景颜色的必要条件
-        # self.label_10.setAutoFillBackground(True)
-        # self.label_12.setAutoFillBackground(True)
-        # pe.setColor(QPalette.Window, Qt.red)  # 设置背景颜色
-        # # pe.setColor(QPalette.Background,Qt.blue)<span style="font-family: Arial, Helvetica, sans-serif;">#设置背景颜色，和上面一行的效果一样
-        # self.label_7.setPalette(pe)
-        # pe.setColor(QPalette.Window, Qt.red)  # 设置背景颜色
-        # self.label_10.setPalette(pe)
-        # pe.setColor(QPalette.Window, Qt.blue)  # 设置背景颜色
-        # self.label_12.setPalette(pe)
+        self.pushButton.setFont(QFont("Roman times", 15, QFont.Bold))
+        self.pushButton_2.setFont(QFont("Roman times", 15, QFont.Bold))
+        self.zoom_in.setFont(QFont("Roman times", 15, QFont.Bold))
+        self.pushButton_3.setFont(QFont("Roman times", 15, QFont.Bold))
+
+
 
     def zoomImg(self):  #放大图片
         self.s = SecondWindow()
+        self.s.label_10.setPixmap(QtGui.QPixmap("./test5.jpg"))
+        self.s.label_10.setScaledContents(True)  # 让图片自适应label大小
+        # self.setStyleSheet("background: black")
+        self.s.label_10.setStyleSheet("border:2px solid black;")
         if not self.s.isVisible():
             self.s.show()
-    def showImg(self):
+
+    def inquire(self):  #查询数据
+        str = self.lineEdit.text()
+        print(str)
+        self.textBrowser.setText(str)
+
+    def showImg(self):  #显示图片
         cv2.imread("./5.jpg")
         self.label_2.setPixmap(QtGui.QPixmap("./5.jpg"))
         self.label_2.setScaledContents(True)  # 让图片自适应label大小
@@ -91,7 +96,7 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         self.label_2.setStyleSheet("border:2px solid red;")
         self.label_3.setStyleSheet("border:2px solid red;")
 
-    def createDB(self): #创建数据库
+    def createDB(self): #连接至数据库
         db = QSqlDatabase.addDatabase('QSQLITE')
         db.setDatabaseName('c:/ca_project/Demo/TestSql/database.db')
 
@@ -106,16 +111,13 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
 class SecondWindow(QWidget):
     def __init__(self, parent=None):
         super(SecondWindow, self).__init__(parent)
-        self.resize(1500, 1500)
+        self.resize(1010, 1010)
         self.label_10 = QtWidgets.QLabel(self)
-        self.label_10.setGeometry(QtCore.QRect(150, 150, 1000, 1000))
+        self.label_10.setGeometry(QtCore.QRect(5, 5, 1000, 1000))
         self.label_10.setFrameShadow(QtWidgets.QFrame.Plain)
         self.label_10.setLineWidth(10)
         self.label_10.setObjectName("label_10")
-        self.label_10.setPixmap(QtGui.QPixmap("./test5.jpg"))
-        self.label_10.setScaledContents(True)  # 让图片自适应label大小
-        # self.setStyleSheet("background: black")
-        self.label_10.setStyleSheet("border:2px solid red;")
+
 
 
 
