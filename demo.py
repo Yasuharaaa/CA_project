@@ -15,7 +15,7 @@ import qdarkstyle
 from PyQt5 import QtWidgets
 from PyQt5.QtSql import QSqlDatabase, QSqlQuery
 import matplotlib.pyplot as plt
-
+from getFileName import *
 
 class MainForm(QMainWindow, Ui_MainWindow, QWidget):
     def __init__(self):
@@ -32,17 +32,23 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         #self.tableView = QTableView()
         self.tableView.setModel(self.model)
         self.tableView.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        # 下面代码让表格100填满窗口
-        # self.tableView.horizontalHeader().setStretchLastSection(True)
-        # self.tableView.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         dlgLayout = QVBoxLayout()
         dlgLayout.addWidget(self.tableView)
         self.setLayout(dlgLayout)
-        # 点击show按钮显示原始图像
-        self.pushButton_2.clicked.connect(self.showImg)
+
+        #初始化定时器
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.showImg)
+
+        # 点击show按钮开始每隔30秒钟显示一次图像
+        self.pushButton_2.clicked.connect(self.startTimer)
+
+        # 点击zoom按钮显示放大的图像
         self.zoom_in.clicked.connect(self.zoomImg)
-        # 点击inquire按钮显示检测后的图像
+
+        # 点击inquire按钮显示需要检测的结果
         self.pushButton.clicked.connect(self.inquire)
+
         #设置字体格式
         self.label_2.setStyleSheet("border:2px solid black;")
         self.label_2.setFont(QFont("Roman times", 20, QFont.Bold))
@@ -65,6 +71,8 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         self.pushButton_3.setFont(QFont("Roman times", 15, QFont.Bold))
 
 
+    def startTimer(self): #启动定时器
+        self.timer.start(3000)
 
     def zoomImg(self):  #放大图片
         self.s = SecondWindow()
@@ -81,13 +89,15 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         self.textBrowser.setText(str)
 
     def showImg(self):  #显示图片
+        imgName1 = new_report('C:\PyTorch\hymenoptera_data/train/ants')
         cv2.imread("./5.jpg")
-        self.label_2.setPixmap(QtGui.QPixmap("./5.jpg"))
+        self.label_2.setPixmap(QtGui.QPixmap(imgName1))
         self.label_2.setScaledContents(True)  # 让图片自适应label大小
         #self.label_2.setScaleContents(True)
         #detect_function()
         sift()
-        self.label_3.setPixmap(QtGui.QPixmap("./test5.jpg"))
+        imgName2 = new_report('C:\PyTorch\hymenoptera_data/train/bees')
+        self.label_3.setPixmap(QtGui.QPixmap(imgName2))
         self.label_3.setScaledContents(True)  # 让图片自适应label大小
         # self.graphicsView.scene = QtWidgets.QGraphicsScene()
         # item = QtWidgets.QGraphicsPixmapItem("./5.jpg")
