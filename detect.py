@@ -72,3 +72,6 @@ def detect_function():
             if count>=4:
                 cv2.rectangle(img, (j-4 , i-1), (j+4, i+1), (0, 0, 255), 1)
     cv2.imwrite("rect5.jpg", img)
+
+if __name__ == '__main__':
+    detect_function()

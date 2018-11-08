@@ -6,80 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1528</width>
-    <height>917</height>
+    <width>1900</width>
+    <height>1000</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>1310</x>
-      <y>810</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Inquire</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>140</y>
-      <width>550</width>
-      <height>550</height>
-     </rect>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Plain</enum>
-    </property>
-    <property name="lineWidth">
-     <number>10</number>
-    </property>
-    <property name="text">
-     <string>FORWARD</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>590</x>
-      <y>140</y>
-      <width>550</width>
-      <height>550</height>
-     </rect>
-    </property>
-    <property name="lineWidth">
-     <number>10</number>
-    </property>
-    <property name="text">
-     <string>BACKWARD</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_2">
-    <property name="geometry">
-     <rect>
-      <x>550</x>
-      <y>800</y>
-      <width>111</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>DETECT</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>720</y>
+      <x>280</x>
+      <y>930</y>
       <width>101</width>
       <height>31</height>
      </rect>
@@ -88,57 +27,21 @@
      <string>WS</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_5">
-    <property name="geometry">
-     <rect>
-      <x>800</x>
-      <y>720</y>
-      <width>101</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>DS</string>
-    </property>
-   </widget>
    <widget class="QTableView" name="tableView">
     <property name="geometry">
      <rect>
-      <x>1160</x>
-      <y>40</y>
-      <width>340</width>
-      <height>700</height>
+      <x>1530</x>
+      <y>100</y>
+      <width>341</width>
+      <height>761</height>
      </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit">
-    <property name="geometry">
-     <rect>
-      <x>1192</x>
-      <y>760</y>
-      <width>281</width>
-      <height>20</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>1060</x>
-      <y>760</y>
-      <width>131</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>请输入要查询的钢卷号：</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>80</y>
+      <y>50</y>
       <width>81</width>
       <height>20</height>
      </rect>
@@ -151,17 +54,17 @@
     <property name="geometry">
      <rect>
       <x>170</x>
-      <y>70</y>
-      <width>241</width>
-      <height>41</height>
+      <y>20</y>
+      <width>741</width>
+      <height>91</height>
      </rect>
     </property>
    </widget>
    <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
-      <x>800</x>
-      <y>60</y>
+      <x>1030</x>
+      <y>30</y>
       <width>54</width>
       <height>12</height>
      </rect>
@@ -173,8 +76,8 @@
    <widget class="QLabel" name="label_8">
     <property name="geometry">
      <rect>
-      <x>730</x>
-      <y>60</y>
+      <x>960</x>
+      <y>30</y>
       <width>54</width>
       <height>12</height>
      </rect>
@@ -186,8 +89,8 @@
    <widget class="QLabel" name="label_9">
     <property name="geometry">
      <rect>
-      <x>730</x>
-      <y>90</y>
+      <x>960</x>
+      <y>60</y>
       <width>54</width>
       <height>12</height>
      </rect>
@@ -199,8 +102,8 @@
    <widget class="QLabel" name="label_10">
     <property name="geometry">
      <rect>
-      <x>800</x>
-      <y>90</y>
+      <x>1030</x>
+      <y>60</y>
       <width>54</width>
       <height>12</height>
      </rect>
@@ -212,8 +115,8 @@
    <widget class="QLabel" name="label_11">
     <property name="geometry">
      <rect>
-      <x>730</x>
-      <y>120</y>
+      <x>960</x>
+      <y>90</y>
       <width>54</width>
       <height>12</height>
      </rect>
@@ -225,8 +128,8 @@
    <widget class="QLabel" name="label_12">
     <property name="geometry">
      <rect>
-      <x>800</x>
-      <y>120</y>
+      <x>1030</x>
+      <y>90</y>
       <width>54</width>
       <height>12</height>
      </rect>
@@ -235,13 +138,137 @@
      <string/>
     </property>
    </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>900</x>
+      <y>930</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>DS</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>130</y>
+      <width>1361</width>
+      <height>791</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="frameShadow">
+        <enum>QFrame::Plain</enum>
+       </property>
+       <property name="lineWidth">
+        <number>10</number>
+       </property>
+       <property name="text">
+        <string>FORWARD</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="lineWidth">
+        <number>10</number>
+       </property>
+       <property name="text">
+        <string>BACKWARD</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>1390</x>
+      <y>130</y>
+      <width>131</width>
+      <height>211</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="text">
+        <string>DETECT</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_3">
+       <property name="text">
+        <string>Stop</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="zoom_in">
+       <property name="text">
+        <string>ZOOM IN</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>1590</x>
+      <y>870</y>
+      <width>231</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>请输入要查询的钢卷号：</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEdit"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="text">
+        <string>Inquire</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <zorder>layoutWidget</zorder>
+   <zorder>layoutWidget</zorder>
+   <zorder>layoutWidget</zorder>
+   <zorder>label_4</zorder>
+   <zorder>tableView</zorder>
+   <zorder>label_6</zorder>
+   <zorder>textBrowser</zorder>
+   <zorder>label_7</zorder>
+   <zorder>label_8</zorder>
+   <zorder>label_9</zorder>
+   <zorder>label_10</zorder>
+   <zorder>label_11</zorder>
+   <zorder>label_12</zorder>
+   <zorder>label_5</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1528</width>
+     <width>1900</width>
      <height>23</height>
     </rect>
    </property>

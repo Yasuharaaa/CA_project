@@ -75,3 +75,5 @@ gray()
 plot_features(im1, l1, circle=True)
 show()
 '''
+if __name__ == '__main__':
+    sift()
