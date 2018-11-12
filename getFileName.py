@@ -4,7 +4,7 @@ def new_report(test_report):
     print(list)
     lists.sort(key=lambda fn:os.path.getmtime(test_report + "\\" + fn))#按时间排序
     file_new = os.path.join(test_report,lists[-1])                     #获取最新的文件保存到file_new
-    print(file_new)
+    #print(file_new)
     return file_new
 if __name__=="__main__":
     test_report="C:\PyTorch\hymenoptera_data/train/ants"#目录地址
