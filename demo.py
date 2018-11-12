@@ -43,6 +43,8 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         # 点击show按钮开始每隔30秒钟显示一次图像
         self.pushButton_2.clicked.connect(self.startTimer)
 
+        # 点击stop按钮暂停图片显示
+        self.pushButton_3.clicked.connect(self.endTimer)
         # 点击zoom按钮显示放大的图像
         self.zoom_in.clicked.connect(self.zoomImg)
 
@@ -73,6 +75,9 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
 
     def startTimer(self): #启动定时器
         self.timer.start(3000)
+
+    def endTimer(self): # 结束定时器
+        self.timer.stop()
 
     def zoomImg(self):  #放大图片
         self.s = SecondWindow()
