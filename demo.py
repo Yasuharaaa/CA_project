@@ -75,10 +75,13 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
 
     def startTimer(self): #启动定时器
         self.timer.start(3000)
+        self.pushButton_2.setEnabled(False)
+        self.pushButton_3.setEnabled(True)
 
     def endTimer(self): # 结束定时器
         self.timer.stop()
-
+        self.pushButton_2.setEnabled(True)
+        self.pushButton_3.setEnabled(False)
     def zoomImg(self):  #放大图片
         self.s = SecondWindow()
         self.s.label_10.setPixmap(QtGui.QPixmap("./test5.jpg"))
