@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import cv2
+#import cv2
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QFileDialog
 from MainWin import Ui_MainWindow
@@ -14,8 +14,9 @@ from PyQt5.QtGui import *
 import qdarkstyle
 from PyQt5 import QtWidgets
 from PyQt5.QtSql import QSqlDatabase, QSqlQuery
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 from getFileName import *
+from cropImg import *
 
 class MainForm(QMainWindow, Ui_MainWindow, QWidget):
     def __init__(self):
@@ -84,7 +85,7 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         self.pushButton_3.setEnabled(False)
     def zoomImg(self):  #放大图片
         self.s = SecondWindow()
-        self.s.label_10.setPixmap(QtGui.QPixmap("./test5.jpg"))
+        self.s.label_10.setPixmap(QtGui.QPixmap(self.cropName))
         self.s.label_10.setScaledContents(True)  # 让图片自适应label大小
         # self.setStyleSheet("background: black")
         self.s.label_10.setStyleSheet("border:2px solid black;")
@@ -98,7 +99,8 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
 
     def showImg(self):  #显示图片
         imgName1 = new_report('C:\PyTorch\hymenoptera_data/train/ants')
-        cv2.imread("./5.jpg")
+        self.cropName = cropAndSave(imgName1)
+        #print(imgName1)
         self.label_2.setPixmap(QtGui.QPixmap(imgName1))
         self.label_2.setScaledContents(True)  # 让图片自适应label大小
         #self.label_2.setScaleContents(True)
