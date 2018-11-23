@@ -73,6 +73,10 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         self.zoom_in.setFont(QFont("Roman times", 15, QFont.Bold))
         self.pushButton_3.setFont(QFont("Roman times", 15, QFont.Bold))
 
+        self.storeDest1 = 'C:/ca_project/Demo/front' #正面图片初始保存位置
+        self.storeDest2 = 'C:/ca_project/Demo/back' #背面图片初始保存位置
+        self.finalDest1 = 'C:/ca_project/Demo/frontfinal'
+        self.finalDest2 = 'C:/ca_project/Demo/backfinal'
 
     def startTimer(self): #启动定时器
         self.timer.start(3000)
@@ -83,6 +87,7 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         self.timer.stop()
         self.pushButton_2.setEnabled(True)
         self.pushButton_3.setEnabled(False)
+
     def zoomImg(self):  #放大图片
         self.s = SecondWindow()
         self.s.label_10.setPixmap(QtGui.QPixmap(self.cropName))
@@ -98,7 +103,7 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         self.textBrowser.setText(str)
 
     def showImg(self):  #显示图片
-        imgName1 = new_report('C:\PyTorch\hymenoptera_data/train/ants')
+        imgName1 = new_report(self.storeDest1, self.finalDest1)
         self.cropName = cropAndSave(imgName1)
         #print(imgName1)
         self.label_2.setPixmap(QtGui.QPixmap(imgName1))
@@ -106,7 +111,7 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         #self.label_2.setScaleContents(True)
         #detect_function()
         sift()
-        imgName2 = new_report('C:\PyTorch\hymenoptera_data/train/bees')
+        imgName2 = new_report(self.storeDest2, self.finalDest2)
         self.label_3.setPixmap(QtGui.QPixmap(imgName2))
         self.label_3.setScaledContents(True)  # 让图片自适应label大小
         # self.graphicsView.scene = QtWidgets.QGraphicsScene()
