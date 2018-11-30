@@ -89,6 +89,7 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
 
     def endTimer(self): # 结束定时器
         self.timer.stop()
+        pygame.mixer.music.stop()
         self.pushButton_2.setEnabled(True)
         self.pushButton_3.setEnabled(False)
 
