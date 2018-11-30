@@ -77,6 +77,7 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         self.storeDest2 = 'C:/ca_project/Demo/back' #背面图片初始保存位置
         self.finalDest1 = 'C:/ca_project/Demo/frontfinal'
         self.finalDest2 = 'C:/ca_project/Demo/backfinal'
+        self.numbers = 0 #检测到角点个数
 
     def startTimer(self): #启动定时器
         self.timer.start(3000)
@@ -90,7 +91,7 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
 
     def zoomImg(self):  #放大图片
         self.s = SecondWindow()
-        self.s.label_10.setPixmap(QtGui.QPixmap(self.cropName))
+        self.s.label_10.setPixmap(QtGui.QPixmap("./detectDst/test.jpg"))
         self.s.label_10.setScaledContents(True)  # 让图片自适应label大小
         # self.setStyleSheet("background: black")
         self.s.label_10.setStyleSheet("border:2px solid black;")
@@ -110,7 +111,7 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         self.label_2.setScaledContents(True)  # 让图片自适应label大小
         #self.label_2.setScaleContents(True)
         #detect_function()
-        sift()
+        self.numbers = sift(self.cropName)
         imgName2 = new_report(self.storeDest2, self.finalDest2)
         self.label_3.setPixmap(QtGui.QPixmap(imgName2))
         self.label_3.setScaledContents(True)  # 让图片自适应label大小
@@ -118,8 +119,9 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         # item = QtWidgets.QGraphicsPixmapItem("./5.jpg")
         # self.graphicsView.scene.addItem(item)
         # self.graphicsView.setScene(self.graphicsView.scene)
-        self.label_2.setStyleSheet("border:2px solid red;")
-        self.label_3.setStyleSheet("border:2px solid red;")
+        if self.numbers > 500:
+            self.label_2.setStyleSheet("border:2px solid red;")
+            self.label_3.setStyleSheet("border:2px solid red;")
 
     def createDB(self): #连接至数据库
         db = QSqlDatabase.addDatabase('QSQLITE')
