@@ -17,6 +17,8 @@ from PyQt5.QtSql import QSqlDatabase, QSqlQuery
 #import matplotlib.pyplot as plt
 from getFileName import *
 from cropImg import *
+import time
+import pygame
 
 class MainForm(QMainWindow, Ui_MainWindow, QWidget):
     def __init__(self):
@@ -78,6 +80,7 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         self.finalDest1 = 'C:/ca_project/Demo/frontfinal'
         self.finalDest2 = 'C:/ca_project/Demo/backfinal'
         self.numbers = 0 #检测到角点个数
+        pygame.init()
 
     def startTimer(self): #启动定时器
         self.timer.start(3000)
@@ -122,6 +125,13 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         if self.numbers > 500:
             self.label_2.setStyleSheet("border:2px solid red;")
             self.label_3.setStyleSheet("border:2px solid red;")
+            #print("播放音乐1")
+            pygame.mixer.music.stop()
+            track = pygame.mixer.music.load(r"./sound/1.mp3")
+
+            pygame.mixer.music.play()
+            #time.sleep(3)
+
 
     def createDB(self): #连接至数据库
         db = QSqlDatabase.addDatabase('QSQLITE')
