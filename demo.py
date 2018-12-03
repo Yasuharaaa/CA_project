@@ -123,11 +123,12 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         # item = QtWidgets.QGraphicsPixmapItem("./5.jpg")
         # self.graphicsView.scene.addItem(item)
         # self.graphicsView.setScene(self.graphicsView.scene)
+        pygame.mixer.music.stop()
         if self.numbers > 500:
             self.label_2.setStyleSheet("border:2px solid red;")
             self.label_3.setStyleSheet("border:2px solid red;")
             #print("播放音乐1")
-            pygame.mixer.music.stop()
+
             track = pygame.mixer.music.load(r"./sound/1.mp3")
 
             pygame.mixer.music.play()
