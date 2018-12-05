@@ -6,7 +6,7 @@
 import cv2
 import numpy as np
 
-def sift(filename):
+def sift(filename, flag):
     img = cv2.imread(filename)
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
@@ -20,7 +20,10 @@ def sift(filename):
     img[dst>0.03*dst.max()]=[0,0,255]
     numbers = len(img[dst>0.03*dst.max()])
     #print(numbers)
-    cv2.imwrite("./detectDst/test.jpg", img)
+    if (flag == 1):
+        cv2.imwrite("./detectDst/test1.jpg", img)
+    if (flag == 2):
+        cv2.imwrite("./detectDst/test2.jpg", img)
     return numbers
 #cv2.imshow('dst',img)
 

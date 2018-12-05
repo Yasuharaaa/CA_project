@@ -79,6 +79,8 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         self.storeDest2 = 'C:/ca_project/Demo/back' #背面图片初始保存位置
         self.finalDest1 = 'C:/ca_project/Demo/frontfinal'
         self.finalDest2 = 'C:/ca_project/Demo/backfinal'
+        self.cropedDst1 = "C:/ca_project/Demo/cropedImageFwd/image_croped.jpg"
+        self.cropedDst2 = "C:/ca_project/Demo/cropedImageBwd/image_croped.jpg"
         self.numbers = 0 #检测到角点个数
         pygame.init()
 
@@ -94,37 +96,46 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         self.pushButton_3.setEnabled(False)
 
     def zoomImg(self):  #放大图片
-        self.s = SecondWindow()
-        self.s.label_10.setPixmap(QtGui.QPixmap("./detectDst/test.jpg"))
-        self.s.label_10.setScaledContents(True)  # 让图片自适应label大小
+        self.s1 = SecondWindow()
+        self.s1.setWindowTitle('Fwd')
+        self.s1.label_10.setPixmap(QtGui.QPixmap("./detectDst/test1.jpg"))
+        self.s1.label_10.setScaledContents(True)  # 让图片自适应label大小
         # self.setStyleSheet("background: black")
-        self.s.label_10.setStyleSheet("border:2px solid black;")
-        if not self.s.isVisible():
-            self.s.show()
+        self.s1.label_10.setStyleSheet("border:2px solid black;")
+        if not self.s1.isVisible():
+            self.s1.show()
+
+        self.s2 = SecondWindow()
+        self.s2.setWindowTitle('Bwd')
+        self.s2.label_10.setPixmap(QtGui.QPixmap("./detectDst/test2.jpg"))
+        self.s2.label_10.setScaledContents(True)  # 让图片自适应label大小
+        # self.setStyleSheet("background: black")
+        self.s2.label_10.setStyleSheet("border:2px solid black;")
+        if not self.s2.isVisible():
+            self.s2.show()
+
 
     def inquire(self):  #查询数据
         str = self.lineEdit.text()
-        print(str)
-        self.textBrowser.setText(str)
+        #print(str)
+        #self.textBrowser.setText(str)
 
     def showImg(self):  #显示图片
         imgName1 = new_report(self.storeDest1, self.finalDest1)
-        self.cropName = cropAndSave(imgName1)
         #print(imgName1)
+        self.cropName1 = cropAndSave(imgName1, self.cropedDst1)
         self.label_2.setPixmap(QtGui.QPixmap(imgName1))
         self.label_2.setScaledContents(True)  # 让图片自适应label大小
-        #self.label_2.setScaleContents(True)
-        #detect_function()
-        self.numbers = sift(self.cropName)
+        self.numbers1 = sift(self.cropName1, 1)
+
         imgName2 = new_report(self.storeDest2, self.finalDest2)
+        self.cropName2 = cropAndSave(imgName2, self.cropedDst2)
         self.label_3.setPixmap(QtGui.QPixmap(imgName2))
         self.label_3.setScaledContents(True)  # 让图片自适应label大小
-        # self.graphicsView.scene = QtWidgets.QGraphicsScene()
-        # item = QtWidgets.QGraphicsPixmapItem("./5.jpg")
-        # self.graphicsView.scene.addItem(item)
-        # self.graphicsView.setScene(self.graphicsView.scene)
+        self.numbers2 = sift(self.cropName2, 2)
+
         pygame.mixer.music.stop()
-        if self.numbers > 500:
+        if self.numbers1 > 500:
             self.label_2.setStyleSheet("border:2px solid red;")
             self.label_3.setStyleSheet("border:2px solid red;")
             #print("播放音乐1")
@@ -133,6 +144,12 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
 
             pygame.mixer.music.play()
             #time.sleep(3)
+        else:
+            self.label_2.setStyleSheet("border:2px solid black;")
+            self.label_3.setStyleSheet("border:2px solid black;")
+
+        str = "当前正面图像为" + imgName1 + "\n" + "当前反面图像为" + imgName2
+        self.textBrowser.setText(str)
 
 
     def createDB(self): #连接至数据库
