@@ -1,46 +1,11 @@
-# -*- coding: utf-8 -*-
-
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
-
-
-class FirstWindow(QWidget):
-
-    close_signal = pyqtSignal()
-    def __init__(self, parent=None):
-        # super这个用法是调用父类的构造函数
-        # parent=None表示默认没有父Widget，如果指定父亲Widget，则调用之
-        super(FirstWindow, self).__init__(parent)
-        self.resize(100, 100)
-        self.btn = QToolButton(self)
-        self.btn.setText("click")
-
-    def closeEvent(self, event):
-        self.close_signal.emit()
-        self.close()
-
-
-class SecondWindow(QWidget):
-    def __init__(self, parent=None):
-        super(SecondWindow, self).__init__(parent)
-        self.resize(200, 200)
-        self.setStyleSheet("background: black")
-
-    def handle_click(self):
-        if not self.isVisible():
-            self.show()
-
-    def handle_close(self):
-        self.close()
-
-
-if __name__ == "__main__":
-    App = QApplication(sys.argv)
-    ex = FirstWindow()
-    s = SecondWindow()
-    ex.btn.clicked.connect(s.handle_click)
-    ex.btn.clicked.connect(ex.hide)
-    #ex.close_signal.connect(ex.close)
-    ex.show()
-    sys.exit(App.exec_())
+import cv2
+import numpy as np
+str = "./data/l40.jpg"
+img = cv2.imread(str)
+img = img[1000:1300,2700:3000]
+gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+gray = np.float32(gray)
+dst = cv2.cornerHarris(gray,2,3,0.04)
+dst = cv2.dilate(dst,None)
+img[dst>0.2*dst.max()]=[0,0,255]
+cv2.imwrite("./data/test.jpg", img)
