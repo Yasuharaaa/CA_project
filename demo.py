@@ -2,6 +2,7 @@
 
 #import cv2
 import sys
+import os
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QFileDialog
 from MainWin import Ui_MainWindow
 from PyQt5 import QtGui
@@ -19,6 +20,9 @@ from getFileName import *
 from cropImg import *
 import time
 import pygame
+import csv
+import pandas as pd
+from inquireFromCsv import *
 
 class MainForm(QMainWindow, Ui_MainWindow, QWidget):
     def __init__(self):
@@ -38,6 +42,8 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         dlgLayout = QVBoxLayout()
         dlgLayout.addWidget(self.tableView)
         self.setLayout(dlgLayout)
+
+        self._create_csv()
 
         #初始化定时器
         self.timer = QTimer(self)
@@ -116,9 +122,18 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
 
 
     def inquire(self):  #查询数据
-        str = self.lineEdit.text()
-        #print(str)
+        kwd = self.lineEdit.text() #获得输入钢卷ID
+        print(str)
         #self.textBrowser.setText(str)
+        df = pd.read_csv('./database/database.csv')
+        #print(df)
+        find, s1, s2, s3 = getCSV(kwd)
+        #print(find)
+        if (find == False):
+             reply = QMessageBox.about(self, "查询结果", "未找到符合要求的钢卷，请重新输入")
+        else:
+             reply = QMessageBox.about(self, "查询结果", "ID: " + s1 + "\tTime: " + s2 + "\tStatus: " + s3)
+        #print(reply)
 
     def showImg(self):  #显示图片
         imgName1 = new_report(self.storeDest1, self.finalDest1)
@@ -152,6 +167,13 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         self.textBrowser.setText(str)
 
 
+    def _create_csv(self):
+        if (not os.path.exists('./database/database.csv')):
+            with open('./database/database.csv', 'w+') as f:
+                csv_write = csv.writer(f)
+                csv_head = ["ID", "Time", "Status"]
+                csv_write.writerow(csv_head)
+
     def createDB(self): #连接至数据库
         db = QSqlDatabase.addDatabase('QSQLITE')
         db.setDatabaseName('c:/ca_project/Demo/TestSql/database.db')
@@ -173,6 +195,8 @@ class SecondWindow(QWidget):
         self.label_10.setFrameShadow(QtWidgets.QFrame.Plain)
         self.label_10.setLineWidth(10)
         self.label_10.setObjectName("label_10")
+
+
 
 
 
