@@ -88,6 +88,10 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         self.cropedDst1 = "C:/ca_project/Demo/cropedImageFwd/image_croped.jpg"
         self.cropedDst2 = "C:/ca_project/Demo/cropedImageBwd/image_croped.jpg"
         self.numbers = 0 #检测到角点个数
+        self.findNew1 = False #目标路径下是否有新的图片
+        self.findNew2 = False
+        self.numbers1 = 0
+        self.number2 = 0
         pygame.init()
 
     def startTimer(self): #启动定时器
@@ -136,33 +140,39 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         #print(reply)
 
     def showImg(self):  #显示图片
-        imgName1 = new_report(self.storeDest1, self.finalDest1)
-        #print(imgName1)
-        self.cropName1 = cropAndSave(imgName1, self.cropedDst1)
-        self.label_2.setPixmap(QtGui.QPixmap(imgName1))
-        self.label_2.setScaledContents(True)  # 让图片自适应label大小
-        self.numbers1 = sift(self.cropName1, 1)
+        self.findNew1, imgName1 = new_report(self.storeDest1, self.finalDest1)
+        self.findNew2, imgName2 = new_report(self.storeDest2, self.finalDest2)
+        #print(self.findNew1, imgName1, self.findNew2, imgName2)
+        if self.findNew1:
+            self.cropName1 = cropAndSave(imgName1, self.cropedDst1)
+            self.label_2.setPixmap(QtGui.QPixmap(imgName1))
+            self.label_2.setScaledContents(True)  # 让图片自适应label大小
+            self.numbers1 = sift(self.cropName1, 1)
+        if self.findNew2:
+            self.cropName2 = cropAndSave(imgName2, self.cropedDst2)
+            self.label_3.setPixmap(QtGui.QPixmap(imgName2))
+            self.label_3.setScaledContents(True)  # 让图片自适应label大小
+            self.numbers2 = sift(self.cropName2, 2)
 
-        imgName2 = new_report(self.storeDest2, self.finalDest2)
-        self.cropName2 = cropAndSave(imgName2, self.cropedDst2)
-        self.label_3.setPixmap(QtGui.QPixmap(imgName2))
-        self.label_3.setScaledContents(True)  # 让图片自适应label大小
-        self.numbers2 = sift(self.cropName2, 2)
+        #print(self.numbers1, self.numbers2)
 
         pygame.mixer.music.stop()
         if self.numbers1 > 500:
             self.label_2.setStyleSheet("border:2px solid red;")
-            self.label_3.setStyleSheet("border:2px solid red;")
+            if self.numbers2 > 500:
+                self.label_3.setStyleSheet("border:2px solid red;")
             #print("播放音乐1")
 
-            track = pygame.mixer.music.load(r"./sound/1.mp3")
 
-            pygame.mixer.music.play()
             #time.sleep(3)
         else:
             self.label_2.setStyleSheet("border:2px solid black;")
             self.label_3.setStyleSheet("border:2px solid black;")
 
+        if self.numbers1 > 500 or self.numbers2 > 500:
+            track = pygame.mixer.music.load(r"./sound/1.mp3")
+
+            pygame.mixer.music.play()
         str = "当前正面图像为" + imgName1 + "\n" + "当前反面图像为" + imgName2
         self.textBrowser.setText(str)
 
