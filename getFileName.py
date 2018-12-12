@@ -18,5 +18,6 @@ def new_report(test_report, dst):
         flag = True
         return flag, file_new
 if __name__=="__main__":
-    test_report="C:\PyTorch\hymenoptera_data/train/ants"#目录地址
-    new_report(test_report, 'C:/ca_project/Demo/front')
+    test_report="C:\ca_project\Demo/front"#目录地址
+    flag, filename = new_report('C:/ca_project/Demo/front', 'C:/ca_project/Demo/frontfinal')
+    print(flag, filename)

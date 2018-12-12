@@ -17,8 +17,8 @@ def sift(filename, flag):
     dst = cv2.dilate(dst,None)
 
     # Threshold for an optimal value, it may vary depending on the image.
-    img[dst>0.03*dst.max()]=[0,0,255]
-    numbers = len(img[dst>0.03*dst.max()])
+    img[dst>0.2*dst.max()]=[0,0,255]
+    numbers = len(img[dst>0.2*dst.max()])
     #print(numbers)
     if (flag == 1):
         cv2.imwrite("./detectDst/test1.jpg", img)
@@ -28,4 +28,4 @@ def sift(filename, flag):
 #cv2.imshow('dst',img)
 
 if __name__ == '__main__':
-    sift('./5.jpg')
+    sift('C:\ca_project\Demo\cropedImageFwd\image_croped.jpg',1)
