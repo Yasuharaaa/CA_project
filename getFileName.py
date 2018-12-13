@@ -9,7 +9,7 @@ def new_report(test_report, dst):
     #print(test_report+lists[0])
     if (listLength == 1):
         file_new = os.path.join(test_report,lists[-1])                     #获取最新的文件保存到file_new
-        flag = True
+        flag = False
         return flag, file_new
     else:
         file_new = os.path.join(test_report, lists[-1])

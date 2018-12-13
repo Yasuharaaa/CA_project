@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1900</width>
-    <height>1000</height>
+    <height>1006</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,23 +17,23 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>930</y>
+      <x>390</x>
+      <y>920</y>
       <width>101</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>WS</string>
+     <string>前景</string>
     </property>
    </widget>
    <widget class="QTableView" name="tableView">
     <property name="geometry">
      <rect>
-      <x>1530</x>
-      <y>100</y>
+      <x>1550</x>
+      <y>10</y>
       <width>341</width>
-      <height>761</height>
+      <height>871</height>
      </rect>
     </property>
    </widget>
@@ -64,7 +64,7 @@
     <property name="geometry">
      <rect>
       <x>1030</x>
-      <y>30</y>
+      <y>20</y>
       <width>54</width>
       <height>12</height>
      </rect>
@@ -77,9 +77,9 @@
     <property name="geometry">
      <rect>
       <x>960</x>
-      <y>30</y>
+      <y>20</y>
       <width>54</width>
-      <height>12</height>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
@@ -90,9 +90,9 @@
     <property name="geometry">
      <rect>
       <x>960</x>
-      <y>60</y>
+      <y>50</y>
       <width>54</width>
-      <height>12</height>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
@@ -103,7 +103,7 @@
     <property name="geometry">
      <rect>
       <x>1030</x>
-      <y>60</y>
+      <y>50</y>
       <width>54</width>
       <height>12</height>
      </rect>
@@ -116,9 +116,9 @@
     <property name="geometry">
      <rect>
       <x>960</x>
-      <y>90</y>
+      <y>80</y>
       <width>54</width>
-      <height>12</height>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
@@ -129,7 +129,7 @@
     <property name="geometry">
      <rect>
       <x>1030</x>
-      <y>90</y>
+      <y>80</y>
       <width>54</width>
       <height>12</height>
      </rect>
@@ -141,89 +141,21 @@
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>900</x>
-      <y>930</y>
+      <x>1150</x>
+      <y>920</y>
       <width>101</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>DS</string>
+     <string>后景</string>
     </property>
    </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>130</y>
-      <width>1361</width>
-      <height>791</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLabel" name="label_2">
-       <property name="frameShadow">
-        <enum>QFrame::Plain</enum>
-       </property>
-       <property name="lineWidth">
-        <number>10</number>
-       </property>
-       <property name="text">
-        <string>FORWARD</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_3">
-       <property name="lineWidth">
-        <number>10</number>
-       </property>
-       <property name="text">
-        <string>BACKWARD</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>1390</x>
-      <y>130</y>
-      <width>131</width>
-      <height>211</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QPushButton" name="pushButton_2">
-       <property name="text">
-        <string>DETECT</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_3">
-       <property name="text">
-        <string>Stop</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="zoom_in">
-       <property name="text">
-        <string>ZOOM IN</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>1590</x>
-      <y>870</y>
+      <x>1620</x>
+      <y>890</y>
       <width>231</width>
       <height>81</height>
      </rect>
@@ -242,14 +174,127 @@
      <item>
       <widget class="QPushButton" name="pushButton">
        <property name="text">
-        <string>Inquire</string>
+        <string>查询</string>
        </property>
       </widget>
      </item>
     </layout>
    </widget>
-   <zorder>layoutWidget</zorder>
-   <zorder>layoutWidget</zorder>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>1150</x>
+      <y>50</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>结束</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="zoom_in">
+    <property name="geometry">
+     <rect>
+      <x>1150</x>
+      <y>90</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>放大</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>1150</x>
+      <y>10</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>开始</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>190</y>
+      <width>750</width>
+      <height>700</height>
+     </rect>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>10</number>
+    </property>
+    <property name="text">
+     <string>FORWARD</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>790</x>
+      <y>190</y>
+      <width>750</width>
+      <height>700</height>
+     </rect>
+    </property>
+    <property name="lineWidth">
+     <number>10</number>
+    </property>
+    <property name="text">
+     <string>BACKWARD</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_13">
+    <property name="geometry">
+     <rect>
+      <x>1300</x>
+      <y>10</y>
+      <width>229</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>请输入要回看的钢卷ID：</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_2">
+    <property name="geometry">
+     <rect>
+      <x>1300</x>
+      <y>40</y>
+      <width>229</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_4">
+    <property name="geometry">
+     <rect>
+      <x>1300</x>
+      <y>80</y>
+      <width>229</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>回看查询</string>
+    </property>
+   </widget>
+   <zorder>pushButton_3</zorder>
+   <zorder>zoom_in</zorder>
+   <zorder>pushButton_2</zorder>
+   <zorder>label_2</zorder>
+   <zorder>label_3</zorder>
    <zorder>layoutWidget</zorder>
    <zorder>label_4</zorder>
    <zorder>tableView</zorder>
@@ -262,6 +307,9 @@
    <zorder>label_11</zorder>
    <zorder>label_12</zorder>
    <zorder>label_5</zorder>
+   <zorder>label_13</zorder>
+   <zorder>lineEdit_2</zorder>
+   <zorder>pushButton_4</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

@@ -23,15 +23,16 @@ import pygame
 import csv
 import pandas as pd
 from inquireFromCsv import *
+from readCSV import *
 
 class MainForm(QMainWindow, Ui_MainWindow, QWidget):
     def __init__(self):
         super(MainForm, self).__init__()
         self.setupUi(self)
-        self.model = QStandardItemModel(10, 3)
-        self.model.setHorizontalHeaderLabels(['Item1', 'Item2', 'Item3'])
+        self.model = QStandardItemModel(50, 3)
+        self.model.setHorizontalHeaderLabels(['ID', 'Time', 'Status'])
 
-        for row in range(24):
+        for row in range(50):
             for column in range(3):
                 item = QStandardItem("row %s, column %s" % (row, column))
                 self.model.setItem(row, column, item)
@@ -145,28 +146,29 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         print(findNew1, imgName1, findNew2, imgName2)
 
         pygame.mixer.music.stop()
-        if findNew1:
-            self.cropName1 = cropAndSave(imgName1, self.cropedDst1)
-            #print(self.cropName1)
-            self.label_2.setPixmap(QtGui.QPixmap(imgName1))
-            self.label_2.setScaledContents(True)  # 让图片自适应label大小
-            self.numbers1 = sift(self.cropName1, 1)
-            if self.numbers1 > 500:
-                self.label_2.setStyleSheet("border:2px solid red;")
-                #print(self.numbers1)
-            else:
-                self.label_2.setStyleSheet("border:2px solid black;")
-        if findNew2:
-            self.cropName2 = cropAndSave(imgName2, self.cropedDst2)
-            self.label_3.setPixmap(QtGui.QPixmap(imgName2))
-            self.label_3.setScaledContents(True)  # 让图片自适应label大小
-            self.numbers2 = sift(self.cropName2, 2)
-            if self.numbers2 > 500:
-                self.label_3.setStyleSheet("border:2px solid red;")
-            else:
-                self.label_3.setStyleSheet("border:2px solid black;")
-        print(self.numbers1)
-        print(self.numbers2)
+
+        self.cropName1 = cropAndSave(imgName1, self.cropedDst1)
+        #print(self.cropName1)
+        self.label_2.setPixmap(QtGui.QPixmap(imgName1))
+        self.label_2.setScaledContents(True)  # 让图片自适应label大小
+        self.numbers1 = sift(self.cropName1, 1)
+        if self.numbers1 > 500:
+            self.label_2.setStyleSheet("border:2px solid red;")
+            #print(self.numbers1)
+        else:
+            self.label_2.setStyleSheet("border:2px solid black;")
+
+        self.cropName2 = cropAndSave(imgName2, self.cropedDst2)
+        self.label_3.setPixmap(QtGui.QPixmap(imgName2))
+        self.label_3.setScaledContents(True)  # 让图片自适应label大小
+        self.numbers2 = sift(self.cropName2, 2)
+        if self.numbers2 > 500:
+            self.label_3.setStyleSheet("border:2px solid red;")
+        else:
+            self.label_3.setStyleSheet("border:2px solid black;")
+
+        #print(self.numbers1)
+        #print(self.numbers2)
         if self.numbers1 > 200 or self.numbers2 > 200:
             #print(2)
             track = pygame.mixer.music.load(r"./sound/1.mp3")
@@ -178,12 +180,34 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
             pygame.init()
         #print(self.numbers1, self.numbers2)
 
-
+        num, df = readCSV('./database/database.csv')
+        self.updateTable(num, df)
 
 
         str = "当前正面图像为" + imgName1 + "\n" + "当前反面图像为" + imgName2
         self.textBrowser.setText(str)
+        self.textBrowser.setFont(QFont("Microsoft YaHei", 15))
 
+    def updateTable(self, num, df):
+        #pass
+        if (num>50):
+            for row in range(50):
+                item = QStandardItem(str(df[-row-1][0]))
+                self.model.setItem(row, 0, item)
+                item = QStandardItem(df[-row-1][1])
+                self.model.setItem(row, 1, item)
+                item = QStandardItem(df[-row-1][2])
+                self.model.setItem(row, 2, item)
+
+        else:
+            for row in range(num):
+                item = QStandardItem(str(df[-row-1][0]))
+                self.model.setItem(row, 0, item)
+                item = QStandardItem(str(df[-row-1][1]))
+                self.model.setItem(row, 1, item)
+                item = QStandardItem(str(df[-row-1][2]))
+                self.model.setItem(row, 2, item)
+                item.setBackground(QColor(255, 0, 0))
 
     def _create_csv(self):
         if (not os.path.exists('./database/database.csv')):
