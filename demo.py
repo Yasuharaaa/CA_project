@@ -64,6 +64,9 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         # 点击“回看查询”回看图片
         self.pushButton_4.clicked.connect(self.playBack)
 
+        # 点击“按时间查询”回看时间轴
+        self.pushButton_5.clicked.connect(self.timeTable)
+
         #设置字体格式
         self.label_2.setStyleSheet("border:2px solid black;")
         self.label_2.setFont(QFont("Roman times", 20, QFont.Bold))
@@ -228,6 +231,12 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
                 self.model.setItem(row, 2, item)
                 item.setBackground(QColor(255, 0, 0))
 
+    def timeTable(self):
+        self.s4 = TimeWindow()
+        self.s4.setWindowTitle('回看数据')
+        if not self.s4.isVisible():
+            self.s4.show()
+
     def _create_csv(self):
         if (not os.path.exists('./database/database.csv')):
             with open('./database/database.csv', 'w+') as f:
@@ -272,6 +281,30 @@ class PlayBackWindow(QWidget):
         self.label_11.setFrameShadow(QtWidgets.QFrame.Plain)
         self.label_11.setLineWidth(10)
         self.label_11.setObjectName("label_11")
+
+class TimeWindow(QWidget):
+    def __init__(self, parent=None):
+        super(TimeWindow, self).__init__(parent)
+        self.resize(400, 1800)
+        self.tableView = QtWidgets.QTableView()
+        self.tableView.setGeometry(QtCore.QRect(10, 10, 380, 1800))
+        self.tableView.setObjectName("tableView")
+        self.model = QStandardItemModel(50, 3)
+        self.model.setHorizontalHeaderLabels(['ID', 'Time', 'Status'])
+
+        for row in range(50):
+            for column in range(3):
+                item = QStandardItem("row %s, column %s" % (row, column))
+                self.model.setItem(row, column, item)
+
+        # self.tableView = QTableView()
+        self.tableView.setModel(self.model)
+        self.tableView.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        dlgLayout = QVBoxLayout()
+        dlgLayout.addWidget(self.tableView)
+        self.setLayout(dlgLayout)
+
+
 
 
 
