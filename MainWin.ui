@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1900</width>
-    <height>1006</height>
+    <width>1920</width>
+    <height>1050</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>390</x>
+      <x>370</x>
       <y>920</y>
       <width>101</width>
       <height>31</height>
@@ -141,7 +141,7 @@
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>1150</x>
+      <x>1130</x>
       <y>920</y>
       <width>101</width>
       <height>31</height>
@@ -150,35 +150,6 @@
     <property name="text">
      <string>后景</string>
     </property>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>1620</x>
-      <y>890</y>
-      <width>231</width>
-      <height>81</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <item>
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>请输入要查询的钢卷号：</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="lineEdit"/>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton">
-       <property name="text">
-        <string>查询</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
    </widget>
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
@@ -222,8 +193,8 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>190</y>
+      <x>-10</x>
+      <y>160</y>
       <width>750</width>
       <height>700</height>
      </rect>
@@ -241,8 +212,8 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>790</x>
-      <y>190</y>
+      <x>760</x>
+      <y>160</y>
       <width>750</width>
       <height>700</height>
      </rect>
@@ -290,6 +261,91 @@
      <string>回看查询</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label_15">
+    <property name="geometry">
+     <rect>
+      <x>1680</x>
+      <y>910</y>
+      <width>191</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>20180101-20181230,间隔号不可省略</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>1440</x>
+      <y>962</y>
+      <width>229</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>查询</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_5">
+    <property name="geometry">
+     <rect>
+      <x>1680</x>
+      <y>962</y>
+      <width>229</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>按时间查询</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_3">
+    <property name="geometry">
+     <rect>
+      <x>1680</x>
+      <y>930</y>
+      <width>231</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_14">
+    <property name="geometry">
+     <rect>
+      <x>1681</x>
+      <y>891</y>
+      <width>211</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>请输入要查询的钢卷号时间，例如：</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>1440</x>
+      <y>929</y>
+      <width>231</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>1440</x>
+      <y>900</y>
+      <width>132</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>请输入要查询的钢卷号：</string>
+    </property>
+   </widget>
    <zorder>pushButton_3</zorder>
    <zorder>zoom_in</zorder>
    <zorder>pushButton_2</zorder>
@@ -310,13 +366,16 @@
    <zorder>label_13</zorder>
    <zorder>lineEdit_2</zorder>
    <zorder>pushButton_4</zorder>
+   <zorder>layoutWidget_2</zorder>
+   <zorder>label_15</zorder>
+   <zorder>pushButton</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1900</width>
+     <width>1920</width>
      <height>23</height>
     </rect>
    </property>

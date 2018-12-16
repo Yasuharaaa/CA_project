@@ -61,6 +61,9 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         # 点击inquire按钮显示需要检测的结果
         self.pushButton.clicked.connect(self.inquire)
 
+        # 点击“回看查询”回看图片
+        self.pushButton_4.clicked.connect(self.playBack)
+
         #设置字体格式
         self.label_2.setStyleSheet("border:2px solid black;")
         self.label_2.setFont(QFont("Roman times", 20, QFont.Bold))
@@ -77,10 +80,11 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         self.label_7.setStyleSheet("border:2px solid black;")
         self.label_10.setStyleSheet("border:2px solid red;")
         self.label_12.setStyleSheet("border:2px solid blue;")
-        self.pushButton.setFont(QFont("Roman times", 15, QFont.Bold))
+        self.pushButton.setFont(QFont("Roman times", 10, QFont.Bold))
         self.pushButton_2.setFont(QFont("Roman times", 15, QFont.Bold))
         self.zoom_in.setFont(QFont("Roman times", 15, QFont.Bold))
         self.pushButton_3.setFont(QFont("Roman times", 15, QFont.Bold))
+        self.pushButton_5.setFont(QFont("Roman times", 10, QFont.Bold))
 
         self.storeDest1 = 'C:/ca_project/Demo/front'  # 正面图片初始保存位置
         self.storeDest2 = 'C:/ca_project/Demo/back'  # 背面图片初始保存位置
@@ -105,6 +109,21 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         pygame.mixer.music.stop()
         self.pushButton_2.setEnabled(True)
         self.pushButton_3.setEnabled(False)
+
+    def playBack(self): #回看图片
+        playBackID = self.lineEdit_2.text()
+        self.s3 = PlayBackWindow()
+        self.s3.setWindowTitle('回看图片')
+        playDst = self.finalDest1 + '/' + playBackID + '.jpg'
+        if os.path.exists(playDst):
+            self.s3.label_10.setPixmap(QtGui.QPixmap(playDst))
+            self.s3.label_10.setScaledContents(True)  # 让图片自适应label大小
+            # self.setStyleSheet("background: black")
+            self.s3.label_10.setStyleSheet("border:2px solid black;")
+            if not self.s3.isVisible():
+                self.s3.show()
+        else:
+            reply = QMessageBox.about(self, "查询结果", "未找到符合要求的钢卷，请重新输入")
 
     def zoomImg(self):  #放大图片
         self.s1 = SecondWindow()
@@ -237,6 +256,24 @@ class SecondWindow(QWidget):
         self.label_10.setFrameShadow(QtWidgets.QFrame.Plain)
         self.label_10.setLineWidth(10)
         self.label_10.setObjectName("label_10")
+
+class PlayBackWindow(QWidget):
+    def __init__(self, parent=None):
+        super(PlayBackWindow, self).__init__(parent)
+        self.resize(1900, 910)
+        self.label_10 = QtWidgets.QLabel(self)
+        self.label_10.setGeometry(QtCore.QRect(5, 5, 900, 900))
+        self.label_10.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.label_10.setLineWidth(10)
+        self.label_10.setObjectName("label_10")
+
+        self.label_11 = QtWidgets.QLabel(self)
+        self.label_11.setGeometry(QtCore.QRect(5, 910, 900, 900))
+        self.label_11.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.label_11.setLineWidth(10)
+        self.label_11.setObjectName("label_11")
+
+
 
 
 
