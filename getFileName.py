@@ -1,7 +1,7 @@
 import os, shutil
 def new_report(test_report, dst):
     lists = os.listdir(test_report)                                    #列出目录的下所有文件和文件夹保存到lists
-    #print(list)
+    #print(lists)
     lists.sort(key=lambda fn:os.path.getmtime(test_report + "\\" + fn))#按时间排序
     #print(lists)
     listLength = len(lists)

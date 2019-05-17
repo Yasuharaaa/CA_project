@@ -30,7 +30,7 @@
    <widget class="QTableView" name="tableView">
     <property name="geometry">
      <rect>
-      <x>1550</x>
+      <x>1560</x>
       <y>10</y>
       <width>341</width>
       <height>871</height>
@@ -64,7 +64,7 @@
     <property name="geometry">
      <rect>
       <x>1030</x>
-      <y>20</y>
+      <y>40</y>
       <width>54</width>
       <height>12</height>
      </rect>
@@ -77,7 +77,7 @@
     <property name="geometry">
      <rect>
       <x>960</x>
-      <y>20</y>
+      <y>40</y>
       <width>54</width>
       <height>16</height>
      </rect>
@@ -90,7 +90,7 @@
     <property name="geometry">
      <rect>
       <x>960</x>
-      <y>50</y>
+      <y>70</y>
       <width>54</width>
       <height>16</height>
      </rect>
@@ -103,7 +103,7 @@
     <property name="geometry">
      <rect>
       <x>1030</x>
-      <y>50</y>
+      <y>70</y>
       <width>54</width>
       <height>12</height>
      </rect>
@@ -116,7 +116,7 @@
     <property name="geometry">
      <rect>
       <x>960</x>
-      <y>80</y>
+      <y>100</y>
       <width>54</width>
       <height>16</height>
      </rect>
@@ -129,7 +129,7 @@
     <property name="geometry">
      <rect>
       <x>1030</x>
-      <y>80</y>
+      <y>100</y>
       <width>54</width>
       <height>12</height>
      </rect>
@@ -155,7 +155,7 @@
     <property name="geometry">
      <rect>
       <x>1150</x>
-      <y>50</y>
+      <y>70</y>
       <width>121</width>
       <height>31</height>
      </rect>
@@ -168,7 +168,7 @@
     <property name="geometry">
      <rect>
       <x>1150</x>
-      <y>90</y>
+      <y>110</y>
       <width>121</width>
       <height>31</height>
      </rect>
@@ -181,7 +181,7 @@
     <property name="geometry">
      <rect>
       <x>1150</x>
-      <y>10</y>
+      <y>30</y>
       <width>121</width>
       <height>31</height>
      </rect>
@@ -193,7 +193,7 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>-10</x>
+      <x>10</x>
       <y>160</y>
       <width>750</width>
       <height>700</height>
@@ -225,46 +225,10 @@
      <string>BACKWARD</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_13">
-    <property name="geometry">
-     <rect>
-      <x>1300</x>
-      <y>10</y>
-      <width>229</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>请输入要回看的钢卷ID：</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
-    <property name="geometry">
-     <rect>
-      <x>1300</x>
-      <y>40</y>
-      <width>229</width>
-      <height>31</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_4">
-    <property name="geometry">
-     <rect>
-      <x>1300</x>
-      <y>80</y>
-      <width>229</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>回看查询</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_15">
     <property name="geometry">
      <rect>
-      <x>1680</x>
+      <x>1620</x>
       <y>910</y>
       <width>191</width>
       <height>21</height>
@@ -277,8 +241,8 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>1440</x>
-      <y>962</y>
+      <x>1300</x>
+      <y>70</y>
       <width>229</width>
       <height>31</height>
      </rect>
@@ -290,7 +254,7 @@
    <widget class="QPushButton" name="pushButton_5">
     <property name="geometry">
      <rect>
-      <x>1680</x>
+      <x>1620</x>
       <y>962</y>
       <width>229</width>
       <height>31</height>
@@ -303,7 +267,7 @@
    <widget class="QLineEdit" name="lineEdit_3">
     <property name="geometry">
      <rect>
-      <x>1680</x>
+      <x>1620</x>
       <y>930</y>
       <width>231</width>
       <height>31</height>
@@ -313,7 +277,7 @@
    <widget class="QLabel" name="label_14">
     <property name="geometry">
      <rect>
-      <x>1681</x>
+      <x>1621</x>
       <y>891</y>
       <width>211</width>
       <height>21</height>
@@ -326,8 +290,8 @@
    <widget class="QLineEdit" name="lineEdit">
     <property name="geometry">
      <rect>
-      <x>1440</x>
-      <y>929</y>
+      <x>1300</x>
+      <y>37</y>
       <width>231</width>
       <height>31</height>
      </rect>
@@ -336,8 +300,8 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>1440</x>
-      <y>900</y>
+      <x>1300</x>
+      <y>8</y>
       <width>132</width>
       <height>16</height>
      </rect>
@@ -346,12 +310,29 @@
      <string>请输入要查询的钢卷号：</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="negButton">
+    <property name="geometry">
+     <rect>
+      <x>1300</x>
+      <y>110</y>
+      <width>229</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>近期疑似毛刺点查询</string>
+    </property>
+   </widget>
+   <zorder>pushButton_5</zorder>
+   <zorder>lineEdit_3</zorder>
+   <zorder>label_14</zorder>
+   <zorder>lineEdit</zorder>
+   <zorder>label</zorder>
    <zorder>pushButton_3</zorder>
    <zorder>zoom_in</zorder>
    <zorder>pushButton_2</zorder>
    <zorder>label_2</zorder>
    <zorder>label_3</zorder>
-   <zorder>layoutWidget</zorder>
    <zorder>label_4</zorder>
    <zorder>tableView</zorder>
    <zorder>label_6</zorder>
@@ -363,12 +344,9 @@
    <zorder>label_11</zorder>
    <zorder>label_12</zorder>
    <zorder>label_5</zorder>
-   <zorder>label_13</zorder>
-   <zorder>lineEdit_2</zorder>
-   <zorder>pushButton_4</zorder>
-   <zorder>layoutWidget_2</zorder>
    <zorder>label_15</zorder>
    <zorder>pushButton</zorder>
+   <zorder>negButton</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

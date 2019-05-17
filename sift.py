@@ -17,7 +17,7 @@ def sift(filename, flag):
     dst = cv2.dilate(dst,None)
 
     # Threshold for an optimal value, it may vary depending on the image.
-    img[dst>0.2*dst.max()]=[0,0,255]
+    img[dst>0.4*dst.max()]=[0,0,255]
     numbers = len(img[dst>0.2*dst.max()])
     #print(numbers)
     if (flag == 1):

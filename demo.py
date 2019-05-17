@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-#import cv2
+import cv2
 import sys
 import os
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QFileDialog
@@ -24,6 +24,8 @@ import csv
 import pandas as pd
 from inquireFromCsv import *
 from readCSV import *
+from ZoomWindow import *
+import re
 
 class MainForm(QMainWindow, Ui_MainWindow, QWidget):
     def __init__(self):
@@ -40,6 +42,7 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         #self.tableView = QTableView()
         self.tableView.setModel(self.model)
         self.tableView.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.tableView.doubleClicked.connect(self.table_change) # 双击事件函数
         dlgLayout = QVBoxLayout()
         dlgLayout.addWidget(self.tableView)
         self.setLayout(dlgLayout)
@@ -62,10 +65,13 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         self.pushButton.clicked.connect(self.inquire)
 
         # 点击“回看查询”回看图片
-        self.pushButton_4.clicked.connect(self.playBack)
+        # self.pushButton_4.clicked.connect(self.playBack)
 
         # 点击“按时间查询”回看时间轴
         self.pushButton_5.clicked.connect(self.timeTable)
+
+        # 近期疑似毛刺点查询
+        self.negButton.clicked.connect(self.negSample)
 
         #设置字体格式
         self.label_2.setStyleSheet("border:2px solid black;")
@@ -102,6 +108,12 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         self.number2 = 0
         pygame.init()
 
+    def negSample(self):
+        pass
+
+    def table_change(self, index): # index为当前点击的行列好
+        QMessageBox.about(self, "双击事件", "双击事件触发成功: " + str(self.model.data(self.model.index(index.row(), 0))))
+
     def startTimer(self): #启动定时器
         self.timer.start(3000)
         self.pushButton_2.setEnabled(False)
@@ -113,20 +125,20 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         self.pushButton_2.setEnabled(True)
         self.pushButton_3.setEnabled(False)
 
-    def playBack(self): #回看图片
-        playBackID = self.lineEdit_2.text()
-        self.s3 = PlayBackWindow()
-        self.s3.setWindowTitle('回看图片')
-        playDst = self.finalDest1 + '/' + playBackID + '.jpg'
-        if os.path.exists(playDst):
-            self.s3.label_10.setPixmap(QtGui.QPixmap(playDst))
-            self.s3.label_10.setScaledContents(True)  # 让图片自适应label大小
-            # self.setStyleSheet("background: black")
-            self.s3.label_10.setStyleSheet("border:2px solid black;")
-            if not self.s3.isVisible():
-                self.s3.show()
-        else:
-            reply = QMessageBox.about(self, "查询结果", "未找到符合要求的钢卷，请重新输入")
+    # def playBack(self): #回看图片
+    #     playBackID = self.lineEdit_2.text()
+    #     self.s3 = PlayBackWindow()
+    #     self.s3.setWindowTitle('回看图片')
+    #     playDst = self.finalDest1 + '/' + playBackID + '.jpg'
+    #     if os.path.exists(playDst):
+    #         self.s3.label_10.setPixmap(QtGui.QPixmap(playDst))
+    #         self.s3.label_10.setScaledContents(True)  # 让图片自适应label大小
+    #         # self.setStyleSheet("background: black")
+    #         self.s3.label_10.setStyleSheet("border:2px solid black;")
+    #         if not self.s3.isVisible():
+    #             self.s3.show()
+    #     else:
+    #         reply = QMessageBox.about(self, "查询结果", "未找到符合要求的钢卷，请重新输入")
 
     def zoomImg(self):  #放大图片
         self.s1 = SecondWindow()
@@ -155,17 +167,21 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         df = pd.read_csv('./database/database.csv')
         #print(df)
         find, s1, s2, s3 = getCSV(kwd)
+        self.play_back = PictureZoom()
+        #self.paly_back.setWindowTitle("回放")
+        self.play_back.show()
         #print(find)
-        if (find == False):
-             reply = QMessageBox.about(self, "查询结果", "未找到符合要求的钢卷，请重新输入")
-        else:
-             reply = QMessageBox.about(self, "查询结果", "ID: " + s1 + "\tTime: " + s2 + "\tStatus: " + s3)
+        # if (find == False):
+        #      reply = QMessageBox.about(self, "查询结果", "未找到符合要求的钢卷，请重新输入")
+        # else:
+        #      reply = QMessageBox.about(self, "查询结果", "ID: " + s1 + "\tTime: " + s2 + "\tStatus: " + s3)
+
         #print(reply)
 
     def showImg(self):  #显示图片
         findNew1, imgName1 = new_report(self.storeDest1, self.finalDest1)
         findNew2, imgName2 = new_report(self.storeDest2, self.finalDest2)
-        print(findNew1, imgName1, findNew2, imgName2)
+        #print(findNew1, imgName1, findNew2, imgName2)
 
         pygame.mixer.music.stop()
 
@@ -232,6 +248,9 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
                 item.setBackground(QColor(255, 0, 0))
 
     def timeTable(self):
+        text = self.lineEdit_3.text()
+        if (not re.match('^[0-9]+-[0-9]+'), text):
+            
         self.s4 = TimeWindow()
         self.s4.setWindowTitle('回看数据')
         if not self.s4.isVisible():
@@ -270,17 +289,80 @@ class PlayBackWindow(QWidget):
     def __init__(self, parent=None):
         super(PlayBackWindow, self).__init__(parent)
         self.resize(1900, 910)
-        self.label_10 = QtWidgets.QLabel(self)
-        self.label_10.setGeometry(QtCore.QRect(5, 5, 900, 900))
-        self.label_10.setFrameShadow(QtWidgets.QFrame.Plain)
-        self.label_10.setLineWidth(10)
-        self.label_10.setObjectName("label_10")
+        self.table1 = QTableView()
+        self.table1.setGeometry(QtCore.QRect(5, 5, 1800, 900))
+        self.table1.setLineWidth(10)
+        self.scene1 = QGraphicsScene(self)
+        self.item1 = QGraphicsPixmapItem()
+        #item1.setPixmap(QPixmap('./Miane.jpg'))
+        # scene1 = QGraphicsScene()
+        # scene1.addItem(item1)
+        # self.table1.setModel(scene1)
+        # self.label_10 = QtWidgets.QLabel(self)
+        # self.label_10.setGeometry(QtCore.QRect(5, 5, 900, 900))
+        # self.label_10.setFrameShadow(QtWidgets.QFrame.Plain)
+        # self.label_10.setLineWidth(10)
+        # self.label_10.setObjectName("label_10")
+        #
+        # self.label_11 = QtWidgets.QLabel(self)
+        # self.label_11.setGeometry(QtCore.QRect(5, 910, 900, 900))
+        # self.label_11.setFrameShadow(QtWidgets.QFrame.Plain)
+        # self.label_11.setLineWidth(10)
+        # self.label_11.setObjectName("label_11")
 
-        self.label_11 = QtWidgets.QLabel(self)
-        self.label_11.setGeometry(QtCore.QRect(5, 910, 900, 900))
-        self.label_11.setFrameShadow(QtWidgets.QFrame.Plain)
-        self.label_11.setLineWidth(10)
-        self.label_11.setObjectName("label_11")
+
+
+class PictureZoom(QMainWindow, Zoom_Window):
+    """
+    Class documentation goes here.
+    """
+
+    def __init__(self, parent=None):
+        """
+        Constructor
+
+        @param parent reference to the parent widget
+        @type QWidget
+        """
+        super(PictureZoom, self).__init__(parent)
+        self.setupUi(self)
+        img = cv2.imread("./Miane.jpg")  # 读取图像
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 转换图像通道
+        x = img.shape[1]  # 获取图像大小
+        y = img.shape[0]
+        self.zoomscale = 1  # 图片放缩尺度
+        frame = QImage(img, x, y, QImage.Format_RGB888)
+        pix = QPixmap.fromImage(frame)
+        self.item = QGraphicsPixmapItem(pix)  # 创建像素图元
+        # self.item.setScale(self.zoomscale)
+        self.scene = QGraphicsScene()  # 创建场景
+        self.scene.addItem(self.item)
+        self.picshow.setScene(self.scene)  # 将场景添加至视图
+        self.setWindowTitle("回放")
+
+    @pyqtSlot()
+    def on_zoomin_clicked(self):
+        """
+        点击缩小图像
+        """
+        # TODO: not implemented yet
+        self.zoomscale = self.zoomscale - 0.05
+        if self.zoomscale <= 0:
+            self.zoomscale = 0.2
+        self.item.setScale(self.zoomscale)  # 缩小图像
+
+    @pyqtSlot()
+    def on_zoomout_clicked(self):
+        """
+        点击方法图像
+        """
+        # TODO: not implemented yet
+        self.zoomscale = self.zoomscale + 0.05
+        if self.zoomscale >= 1.2:
+            self.zoomscale = 1.2
+        self.item.setScale(self.zoomscale)  # 放大图像
+
+
 
 class TimeWindow(QWidget):
     def __init__(self, parent=None):
@@ -303,6 +385,7 @@ class TimeWindow(QWidget):
         dlgLayout = QVBoxLayout()
         dlgLayout.addWidget(self.tableView)
         self.setLayout(dlgLayout)
+
 
 
 
