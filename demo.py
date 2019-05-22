@@ -26,6 +26,7 @@ from inquireFromCsv import *
 from readCSV import *
 from ZoomWindow import *
 import re
+from isRoll import *
 
 class MainForm(QMainWindow, Ui_MainWindow, QWidget):
     def __init__(self):
@@ -108,6 +109,13 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         self.number2 = 0
         pygame.init()
 
+    def closeEvent(self, event): # 退出警告
+        ret = QMessageBox.question(self, "警告", "确定要退出吗?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        if ret == QMessageBox.Yes:
+            event.accept()
+        else:
+            event.ignore()
+
     def negSample(self):
         pass
 
@@ -115,7 +123,7 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
         QMessageBox.about(self, "双击事件", "双击事件触发成功: " + str(self.model.data(self.model.index(index.row(), 0))))
 
     def startTimer(self): #启动定时器
-        self.timer.start(3000)
+        self.timer.start(5000)
         self.pushButton_2.setEnabled(False)
         self.pushButton_3.setEnabled(True)
 
@@ -162,11 +170,11 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
 
     def inquire(self):  #查询数据
         kwd = self.lineEdit.text() #获得输入钢卷ID
-        print(str)
+        # print(str)
         #self.textBrowser.setText(str)
         df = pd.read_csv('./database/database.csv')
         #print(df)
-        find, s1, s2, s3 = getCSV(kwd)
+        # find, s1, s2, s3 = getCSV(kwd)
         self.play_back = PictureZoom()
         #self.paly_back.setWindowTitle("回放")
         self.play_back.show()
@@ -178,7 +186,20 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
 
         #print(reply)
 
+
+    def _selfCheck(self, src): # 检查文件夹中是否有没拍到钢卷的图像，有的话删除
+        file_name_list = os.listdir(src)
+        # print(file_name_list)
+        check(src, file_name_list)
+
+
+
+
     def showImg(self):  #显示图片
+        self._selfCheck(self.storeDest1) # 除错图
+        self._selfCheck(self.storeDest2)
+        if not os.listdir(self.storeDest1) or not os.listdir(self.storeDest2): # 没有图则不做任何操作
+            return
         findNew1, imgName1 = new_report(self.storeDest1, self.finalDest1)
         findNew2, imgName2 = new_report(self.storeDest2, self.finalDest2)
         #print(findNew1, imgName1, findNew2, imgName2)
@@ -249,12 +270,14 @@ class MainForm(QMainWindow, Ui_MainWindow, QWidget):
 
     def timeTable(self):
         text = self.lineEdit_3.text()
-        if (not re.match('^[0-9]+-[0-9]+'), text):
-            
-        self.s4 = TimeWindow()
-        self.s4.setWindowTitle('回看数据')
-        if not self.s4.isVisible():
-            self.s4.show()
+        # print(text)
+        if (not re.match('^[0-9]+-[0-9]+', text)):
+            QMessageBox.about(self, "错误", "时间查询有误，请检查并重新输入")
+        else:
+            self.s4 = TimeWindow()
+            self.s4.setWindowTitle('回看数据')
+            if not self.s4.isVisible():
+                self.s4.show()
 
     def _create_csv(self):
         if (not os.path.exists('./database/database.csv')):
@@ -317,7 +340,7 @@ class PictureZoom(QMainWindow, Zoom_Window):
     Class documentation goes here.
     """
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, file_name = 'Miane.jpg'):
         """
         Constructor
 
@@ -326,7 +349,7 @@ class PictureZoom(QMainWindow, Zoom_Window):
         """
         super(PictureZoom, self).__init__(parent)
         self.setupUi(self)
-        img = cv2.imread("./Miane.jpg")  # 读取图像
+        img = cv2.imread(file_name)  # 读取图像
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 转换图像通道
         x = img.shape[1]  # 获取图像大小
         y = img.shape[0]
@@ -373,6 +396,7 @@ class TimeWindow(QWidget):
         self.tableView.setObjectName("tableView")
         self.model = QStandardItemModel(50, 3)
         self.model.setHorizontalHeaderLabels(['ID', 'Time', 'Status'])
+        self.zoomWin = PictureZoom()
 
         for row in range(50):
             for column in range(3):
@@ -385,6 +409,13 @@ class TimeWindow(QWidget):
         dlgLayout = QVBoxLayout()
         dlgLayout.addWidget(self.tableView)
         self.setLayout(dlgLayout)
+        self.tableView.doubleClicked.connect(self.showZoomImg)
+
+    def showZoomImg(self, index):
+        #
+        #QMessageBox.about(self, "双击事件", "双击事件触发成功: " + str(self.model.data(self.model.index(index.row(), 0))))
+
+        self.zoomWin.show()
 
 
 

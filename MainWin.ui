@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>前景</string>
+     <string>ws</string>
     </property>
    </widget>
    <widget class="QTableView" name="tableView">
@@ -148,7 +148,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>后景</string>
+     <string>ds</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_3">
